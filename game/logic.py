@@ -1,34 +1,44 @@
 def score_guess(secret: str, guess: str, length) -> tuple[int, int]:
     bool = 0
     cow = 0
-    # for index in range(length):
-    #     if guess[index] == guess[index]:
-    #         bool += 1
-    if secret == guess:
-        pass
+    for index in range(length):
+        if secret[index] == guess[index]:
+            bool += 1
+        if secret[index] != guess[index]:
+            if guess[index] in secret:
+                cow += 1
 
-print(score_guess("1215","1215",4))
+
+
+    return bool,cow
+
+
 
 def is_won(bulls: int, length: int) -> bool:
-    pass
+    return bulls == length
 
 
 
-GameState = {   "secret": str,
-        "length": int,
-        "max_tries": int | None,
-        "tries_used": int,
-        "unique_digits": bool,
-        "allow_leading_zero": bool,
-        "history": list[tuple[str, int, int]],
-        "seen": set[str]}
+
+def init_state(secret: str, length: int, max_tries: int | None, unique_digits = False, allow_leading_zero=False,seen = ()):
+    game_state = {"secret": secret,
+                  "length": length,
+                  "max_tries": max_tries,
+                  "tries_used": 0,
+                  "unique_digits":unique_digits,
+                  "allow_leading_zero":allow_leading_zero,
+                  "history":[],
+                  "seen":set()
+                  }
+    return game_state
+
+def apply_guess(state, guess: str):
+
+    state["tries_used"] += 1
+    state["history"].append(guess)
+    return state
 
 
-def init_state(secret: str, length: int, max_tries: int | None, unique_digits: bool, allow_leading_zero: bool) -> GameState:
-    pass
 
-
-def apply_guess(state: GameState, guess: str) -> tuple[int, int] :
-    pass
 
 

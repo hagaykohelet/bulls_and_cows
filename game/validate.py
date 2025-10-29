@@ -1,5 +1,6 @@
 def is_valid_guess(guess: str, length: int, *, unique_digits: bool = True) -> tuple[bool, str]:
-    if len(guess) > length:
+
+    if length > len(guess) or len(guess) > length:
         return False,guess
     return True,guess
 
